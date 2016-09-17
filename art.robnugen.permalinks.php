@@ -2,14 +2,19 @@
 require_once '/home/robuwikipix/art.robnugen.com/includes/mysql.php';
 require_once '/home/robuwikipix/art.robnugen.com/includes/lilurl.php';
 
-$wgExtensionFunctions[] = 'efPermalinksForArt';
+$wgHooks['ParserFirstCallInit'][] = 'ArtRobnugenComPermalinks::onParserSetup';
 
-function efPermalinksForArt() {
-    global $wgParser;
-    $wgParser->setHook( 'permalink', 'efRenderPermalinkLine' );
-}
+class ArtRobnugenComPermalinks {
+    // Register any render callbacks with the parser
+    function onParserSetup( Parser $parser ) {
+        // When the parser sees the <sample> tag, it executes renderTagSample (see below)
+        $parser->setHook( 'permalink', 'ArtRobnugenComPermalinks::renderTagNavigation' );
+        return true;
+    }
 
-function efRenderPermalinkLine( $input, $args, $parser ) {
+    // Render <sample>
+    function renderTagNavigation( $input, array $args, Parser $parser, PPFrame $frame ) {
+        // Nothing exciting here, just escape the user-provided input and throw it back out again (as example)
 	global $wgRequest;
 	$prefix = "The permalink for this page is ";
 
@@ -32,5 +37,5 @@ function efRenderPermalinkLine( $input, $args, $parser ) {
 	{
 		return "This page has no permalink on art.robnugen.com";
 	}
+    }
 }
-?>

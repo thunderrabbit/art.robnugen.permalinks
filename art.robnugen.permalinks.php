@@ -30,12 +30,12 @@ class ArtRobnugenComPermalinks {
 
 	if($permalink_id != -1)
 	{
-		$permalink = $parser->recursiveTagParse("http://art.robnugen.com/" . $permalink_id);
+		$permalink = $parser->recursiveTagParse("https://art.robnugen.com/" . $permalink_id);
 		return implode(" ",array($prefix,$permalink));
 	}
 	else
 	{
-		return "This page has no permalink on art.robnugen.com";
+		return "This page has no permalink on " . $parser->recursiveTagParse("https://art.robnugen.com");
 	}
     }
 }

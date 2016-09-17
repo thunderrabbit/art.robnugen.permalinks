@@ -15,6 +15,9 @@ class ArtRobnugenComPermalinks {
     // Render <sample>
     function renderTagNavigation( $input, array $args, Parser $parser, PPFrame $frame ) {
         // Nothing exciting here, just escape the user-provided input and throw it back out again (as example)
+
+        $base_url = "https://art.robnugen.com/";
+
 	global $wgRequest;
 	$prefix = "The permalink for this page is ";
 
@@ -30,12 +33,12 @@ class ArtRobnugenComPermalinks {
 
 	if($permalink_id != -1)
 	{
-		$permalink = $parser->recursiveTagParse("https://art.robnugen.com/" . $permalink_id);
+		$permalink = $parser->recursiveTagParse($base_url . $permalink_id);
 		return implode(" ",array($prefix,$permalink));
 	}
 	else
 	{
-		return "This page has no permalink on " . $parser->recursiveTagParse("https://art.robnugen.com");
+		return "This page has no permalink on " . $parser->recursiveTagParse($base_url);
 	}
     }
 }

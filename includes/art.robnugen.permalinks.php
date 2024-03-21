@@ -7,15 +7,13 @@ $wgHooks['ParserFirstCallInit'][] = 'ArtRobnugenComPermalinks::onParserSetup';
 class ArtRobnugenComPermalinks {
     // Register any render callbacks with the parser
     function onParserSetup( Parser $parser ) {
-        // When the parser sees the <sample> tag, it executes renderTagSample (see below)
-        $parser->setHook( 'permalink', 'ArtRobnugenComPermalinks::renderTagNavigation' );
+        // When the parser sees the <permalink> tag, it executes renderTagPermalink (see below)
+        $parser->setHook( 'permalink', 'ArtRobnugenComPermalinks::renderTagPermalink' );
         return true;
     }
 
-    // Render <sample>
-    function renderTagNavigation( $input, array $args, Parser $parser, PPFrame $frame ) {
-        // Nothing exciting here, just escape the user-provided input and throw it back out again (as example)
-
+    // Render <permalink>
+    function renderTagPermalink( $input, array $args, Parser $parser, PPFrame $frame ) {
         $base_url = "https://art.robnugen.com/";
 
 		global $wgRequest;

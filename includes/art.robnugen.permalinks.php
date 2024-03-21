@@ -13,6 +13,15 @@ class ArtRobnugenComPermalinks {
     }
 
     // Render <permalink>
+	//  @param string $input The content of the tag
+	//   (unused for art.robnugen.com).
+	//  @param array $args The attributes of the tag
+	//   (unused for art.robnugen.com).
+	//  @param Parser $parser Parser instance available to render
+	//   wikitext into html, or parser methods.
+	//  @param PPFrame $frame Can be used to see what template
+	//   this hook was used with.
+	//  @return string HTML to insert in the page.
     function renderTagPermalink( $input, array $args, Parser $parser, PPFrame $frame ) {
         $base_url = "https://art.robnugen.com/";
 

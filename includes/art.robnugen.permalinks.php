@@ -5,23 +5,34 @@ require_once '/home/robuwikipix/art.robnugen.com/includes/lilurl.php';
 $wgHooks['ParserFirstCallInit'][] = 'ArtRobnugenComPermalinks::onParserSetup';
 
 class ArtRobnugenComPermalinks {
-    // Register any render callbacks with the parser
+    //
+
+	/**
+	 * Register any render callbacks with the parser
+	 * @param Parser $parser
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ParserFirstCallInit
+	 * @see https://www.mediawiki.org/wiki/Manual:Parser_functions
+	 * @param Parser $parser
+	 * @throws \MWException
+	 */
     function onParserSetup( Parser $parser ) {
         // When the parser sees the <permalink> tag, it executes renderTagPermalink (see below)
         $parser->setHook( 'permalink', 'ArtRobnugenComPermalinks::renderTagPermalink' );
         return true;
     }
 
-    // Render <permalink>
-	//  @param string $input The content of the tag
-	//   (unused for art.robnugen.com).
-	//  @param array $args The attributes of the tag
-	//   (unused for art.robnugen.com).
-	//  @param Parser $parser Parser instance available to render
-	//   wikitext into html, or parser methods.
-	//  @param PPFrame $frame Can be used to see what template
-	//   this hook was used with.
-	//  @return string HTML to insert in the page.
+	/**
+	 * Render <permalink>
+	 *  @param string $input The content of the tag
+	 *   (unused for art.robnugen.com).
+	 *  @param array $args The attributes of the tag
+	 *   (unused for art.robnugen.com).
+	 *  @param Parser $parser Parser instance available to render
+	 *   wikitext into html, or parser methods.
+	 *  @param PPFrame $frame Can be used to see what template
+	 *   this hook was used with.
+	 *  @return string HTML to insert in the page.
+	 */
     function renderTagPermalink( $input, array $args, Parser $parser, PPFrame $frame ) {
         $base_url = "https://art.robnugen.com/";
 

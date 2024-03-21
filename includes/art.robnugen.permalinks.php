@@ -18,27 +18,27 @@ class ArtRobnugenComPermalinks {
 
         $base_url = "https://art.robnugen.com/";
 
-	global $wgRequest;
-	$prefix = "The permalink for this page is ";
+		global $wgRequest;
+		$prefix = "The permalink for this page is ";
 
-	$fullURL = $wgRequest->getFullRequestURL();
+		$fullURL = $wgRequest->getFullRequestURL();
 
-	$actualURL = preg_replace('/\?(.)*/','',$fullURL);	// wipe any URL params
+		$actualURL = preg_replace('/\?(.)*/','',$fullURL);	// wipe any URL params
 
-	$mysql_safeURL = trim($actualURL);
+		$mysql_safeURL = trim($actualURL);
 
-	$lilurl = new lilURL();
-	
-	$permalink_id = $lilurl->get_id($mysql_safeURL);
+		$lilurl = new lilURL();
 
-	if($permalink_id != -1)
-	{
-		$permalink = $parser->recursiveTagParse($base_url . $permalink_id);
-		return implode(" ",array($prefix,$permalink));
-	}
-	else
-	{
-		return "This page has no permalink on " . $parser->recursiveTagParse($base_url);
-	}
+		$permalink_id = $lilurl->get_id($mysql_safeURL);
+
+		if($permalink_id != -1)
+		{
+			$permalink = $parser->recursiveTagParse($base_url . $permalink_id);
+			return implode(" ",array($prefix,$permalink));
+		}
+		else
+		{
+			return "This page has no permalink on " . $parser->recursiveTagParse($base_url);
+		}
     }
 }

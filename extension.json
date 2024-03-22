@@ -1,0 +1,30 @@
+{
+	"name": "ArtRobNugenCom",
+	"author": [
+		"Timo Tijhof",
+		"Kaldari",
+		"Ævar Arnfjörð Bjarmason",
+		"Daniel Kinzler",
+		"Derick Alangi",
+		"Rob Nugen"
+	],
+	"url": "https://github.com/thunderrabbit/art.robnugen.permalinks",
+	"descriptionmsg": "Add art.robnugen.com permalinks to wiki.robnugen.com",
+	"license-name": "GPL-2.0-or-later",
+	"type": "other",
+	"requires": {
+		"MediaWiki": ">= 1.35.0"
+	},
+	"AutoloadNamespaces": {
+		"RobNugen\\": "includes/"
+	},
+	"Hooks": {
+		"ParserFirstCallInit": "handleHooks"
+	},
+	"HookHandlers": {
+		"handleHooks": {
+			"class": "RobNugen\\ArtRobNugenComPermalinks"
+		}
+	},
+	"manifest_version": 2
+}

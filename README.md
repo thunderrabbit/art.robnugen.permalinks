@@ -1,6 +1,6 @@
 HI Rob
 
-This is 21 March 2024 Rob, trying to get this repo to work in PHP 8.1 and Mediwiki 1.34
+This is 22 March 2024 Rob, who got this extension to work in PHP 8.1 and Mediwiki 1.34
 
 Local Lemur:
 
@@ -13,7 +13,7 @@ Dreamhost:
 
 ```
 ssh wiki
-cd ~/wiki.robnugen.com/w/extensions/ArtRobNugenCom
+cd ~/wiki.robnugen.com/w/extensions/ArtRobNugenComPermalinks
 ```
 
 Notion notes

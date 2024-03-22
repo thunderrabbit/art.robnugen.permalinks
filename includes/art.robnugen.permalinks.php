@@ -1,24 +1,35 @@
 <?php
+// phpcs:disable MediaWiki.NamingConventions.LowerCamelFunctionsName.FunctionName
+
+/**
+ * ArtRobNugenComPermalinks for Example extension.
+ *
+ * @file
+ */
+
+namespace RobNugen;
+
 require_once '/home/robuwikipix/art.robnugen.com/includes/mysql.php';
 require_once '/home/robuwikipix/art.robnugen.com/includes/lilurl.php';
 
-$wgHooks['ParserFirstCallInit'][] = 'ArtRobnugenComPermalinks::onParserSetup';
+use Parser;
+use PPFrame;
 
-class ArtRobnugenComPermalinks {
-    //
+class ArtRobNugenComPermalinks implements
+	\MediaWiki\Hook\ParserFirstCallInitHook
+{
 
 	/**
-	 * Register any render callbacks with the parser
-	 * @param Parser $parser
+	 * Register parser hooks.
+	 *
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ParserFirstCallInit
 	 * @see https://www.mediawiki.org/wiki/Manual:Parser_functions
 	 * @param Parser $parser
 	 * @throws \MWException
 	 */
-    function onParserSetup( Parser $parser ) {
+    function onParserFirstCallInit( Parser $parser ) {
         // When the parser sees the <permalink> tag, it executes renderTagPermalink (see below)
-        $parser->setHook( 'permalink', 'ArtRobnugenComPermalinks::renderTagPermalink' );
-        return true;
+		$parser->setHook('permalink', [self::class, 'renderTagNavigation']);
     }
 
 	/**
@@ -33,8 +44,9 @@ class ArtRobnugenComPermalinks {
 	 *   this hook was used with.
 	 *  @return string HTML to insert in the page.
 	 */
-    function renderTagPermalink( $input, array $args, Parser $parser, PPFrame $frame ) {
-        $base_url = "https://art.robnugen.com/";
+	public static function renderTagNavigation($input, array $args, Parser $parser, PPFrame $frame)
+	{
+		$base_url = "https://art.robnugen.com/";
 
 		global $wgRequest;
 		$prefix = "The permalink for this page is ";
@@ -45,7 +57,7 @@ class ArtRobnugenComPermalinks {
 
 		$mysql_safeURL = trim($actualURL);
 
-		$lilurl = new lilURL();
+		$lilurl = new \lilURL();
 
 		$permalink_id = $lilurl->get_id($mysql_safeURL);
 
@@ -58,5 +70,5 @@ class ArtRobnugenComPermalinks {
 		{
 			return "This page has no permalink on " . $parser->recursiveTagParse($base_url);
 		}
-    }
+	}
 }

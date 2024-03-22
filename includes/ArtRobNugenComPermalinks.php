@@ -27,9 +27,9 @@ class ArtRobNugenComPermalinks implements
 	 * @param Parser $parser
 	 * @throws \MWException
 	 */
-    function onParserFirstCallInit( Parser $parser ) {
+    function onParserFirstCallInit( $parser ) {
         // When the parser sees the <permalink> tag, it executes renderTagPermalink (see below)
-		$parser->setHook('permalink', [self::class, 'renderTagNavigation']);
+		$parser->setHook('permalink', [self::class, 'renderTagPermalink']);
     }
 
 	/**
@@ -44,7 +44,7 @@ class ArtRobNugenComPermalinks implements
 	 *   this hook was used with.
 	 *  @return string HTML to insert in the page.
 	 */
-	public static function renderTagNavigation($input, array $args, Parser $parser, PPFrame $frame)
+	public static function renderTagPermalink($input, array $args, Parser $parser, PPFrame $frame)
 	{
 		$base_url = "https://art.robnugen.com/";
 

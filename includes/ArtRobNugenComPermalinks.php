@@ -14,6 +14,7 @@ require_once '/home/robuwikipix/art.robnugen.com/includes/lilurl.php';
 
 use Parser;
 use PPFrame;
+use RequestContext;
 
 class ArtRobNugenComPermalinks implements
 	\MediaWiki\Hook\ParserFirstCallInitHook
@@ -48,10 +49,9 @@ class ArtRobNugenComPermalinks implements
 	{
 		$base_url = "https://art.robnugen.com/";
 
-		global $wgRequest;
 		$prefix = "The permalink for this page is ";
 
-		$fullURL = $wgRequest->getFullRequestURL();
+		$fullURL = RequestContext::getMain()->getRequest()->getFullRequestURL();
 
 		$actualURL = preg_replace('/\?(.)*/','',$fullURL);	// wipe any URL params
 
